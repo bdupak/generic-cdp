@@ -36,7 +36,7 @@ public class GenericHolder<T> implements Iterable<T> {
         size++;
     }
 
-    public void resize() {
+    private void resize() {
         capacity = capacity + (capacity >> 1);
         holder = Arrays.copyOf(holder, capacity);
     }

@@ -1,34 +1,36 @@
 package com.epam.logic.container.without_generic;
 
+import com.epam.model.User;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class SimpleHolder implements Iterable {
+public class UserHolder implements Iterable {
     private static final int DEFAULT_CAPACITY = 10;
     private int capacity = 0;
     private int size = 0;
-    private Object[] holder;
+    private User[] holder;
 
-    public SimpleHolder() {
+    public UserHolder() {
         initHolder(DEFAULT_CAPACITY);
     }
 
-    public SimpleHolder(int capacity) {
+    public UserHolder(int capacity) {
         initHolder(capacity);
     }
 
     private void initHolder(int capacity) {
         if (capacity >= 0) {
-            holder = new Object[capacity];
+            holder = new User[capacity];
             this.capacity = capacity;
         } else {
             throw new NegativeArraySizeException("The size of container can't be negative");
         }
     }
 
-    public void addElement(Object element) {
+    public void addElement(User element) {
         if (size == capacity)
             resize();
         holder[size] = element;
@@ -51,7 +53,7 @@ public class SimpleHolder implements Iterable {
         throw new IllegalArgumentException("Oops something goes wrong");
     }
 
-    public boolean findElement(Object element) {
+    public boolean findElement(User element) {
         for (Object entity : holder) {
             if (entity.equals(element)) {
                 return true;
@@ -75,7 +77,7 @@ public class SimpleHolder implements Iterable {
 
     @Override
     public Iterator iterator() {
-        return new CustomIterator();
+        return new UserHolder.CustomIterator();
     }
 
     @Override
