@@ -2,8 +2,10 @@ package com.epam.logic.container.generic;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
-public class GenericHolder<T> {
+public class GenericHolder<T> implements Iterable<T> {
 
     private static final int DEFAULT_CAPACITY = 10;
     private int capacity = 0;
@@ -52,7 +54,7 @@ public class GenericHolder<T> {
     }
 
     public boolean findElement(T element) {
-        for(Object entity : holder) {
+        for (Object entity : holder) {
             if (entity.equals(element)) {
                 return true;
             }
@@ -61,7 +63,7 @@ public class GenericHolder<T> {
     }
 
     public int getIndex(T element) {
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (holder[i].equals(element)) {
                 return i;
             }
@@ -71,5 +73,40 @@ public class GenericHolder<T> {
 
     public int size() {
         return size;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new CustomIterator<>();
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> action) {
+        T[] elements = (T[]) holder;
+        for (int i = 0; i < size; i++) {
+            action.accept(elements[i]);
+        }
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return null;
+    }
+
+    public class CustomIterator<T> implements Iterator<T> {
+        int position = -1;
+        int lastReturned;
+
+        @Override
+        public boolean hasNext() {
+            return position != size - 1;
+        }
+
+        @Override
+        public T next() {
+            position++;
+            lastReturned = position;
+            return (T) holder[position];
+        }
     }
 }
