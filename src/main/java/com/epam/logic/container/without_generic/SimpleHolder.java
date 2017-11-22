@@ -10,7 +10,6 @@ public class SimpleHolder implements Iterable {
     private int capacity = 0;
     private int size = 0;
     private Object[] holder;
-    private Iterator iterator;
 
     public SimpleHolder() {
         initHolder(DEFAULT_CAPACITY);

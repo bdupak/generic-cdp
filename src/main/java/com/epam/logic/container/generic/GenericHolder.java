@@ -11,7 +11,6 @@ public class GenericHolder<T> implements Iterable<T> {
     private int capacity = 0;
     private int size = 0;
     private Object[] holder;
-    private Iterator<T> iterator;
 
     public GenericHolder() {
         initHolder(DEFAULT_CAPACITY);
