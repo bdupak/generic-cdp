@@ -1,5 +1,6 @@
 package com.epam.logic.container.generic;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class GenericHolder<T> {
@@ -21,6 +22,7 @@ public class GenericHolder<T> {
     private void initHolder(int capacity) {
         if (capacity >= 0) {
             holder = new Object[capacity];
+            this.capacity = capacity;
         } else {
             throw new NegativeArraySizeException("The size of container can't be negative");
         }
@@ -28,14 +30,14 @@ public class GenericHolder<T> {
 
     public void addElement(T element) {
         if (size == capacity)
-            resize(holder);
+            resize();
         holder[size] = element;
         size++;
     }
 
-    public void resize(Object[] oldHolder) {
+    public void resize() {
         capacity = capacity + (capacity >> 1);
-        System.arraycopy(holder, 0, oldHolder, 0, capacity);
+        holder = Arrays.copyOf(holder, capacity);
     }
 
     public Object getElement(int index) {
