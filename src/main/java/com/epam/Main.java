@@ -12,5 +12,6 @@ public class Main {
         for(int i = 0; i < holder.size(); i++) {
             System.out.println(holder.getElement(i));
         }
+        System.out.println(holder.getIndex(new User("user1", "user1", 1)));
     }
 }
