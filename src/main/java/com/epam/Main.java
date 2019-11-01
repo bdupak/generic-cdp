@@ -76,4 +76,6 @@ public class Main {
 //        UserHolder testException = new UserHolder();
 //        userHolder.addElement(new ModernUser("test", "test", 3));
     }
+
+    public void newMethod() {}
 }
